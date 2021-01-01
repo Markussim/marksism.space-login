@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reister</title>
+    <title>Register</title>
     <!--CDN IMPORT OF Crypto-JS used for the hashing and salting of password-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 
     <script src="hash.js" type="module"></script>
-    <script src="register.js" type="module"></script>
+    <script src="register.js" type="module" defer></script>
   </head>
   <body>
-    <form onsubmit="regUsrOnSubmit(); return false;">
+    <form id="theForm">
       <input type="text" placeholder="username" name="username" id="username" />
       <br />
       <input

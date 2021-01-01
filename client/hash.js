@@ -1,4 +1,4 @@
-function registerUser(username, password) {
+function registerUser(username, password, errorBox) {
   let request = new XMLHttpRequest();
   let name = username;
   let pass = CryptoJS.MD5(password + name);
@@ -7,11 +7,13 @@ function registerUser(username, password) {
   request.send(`name=${name}&password=${pass}`);
   request.onreadystatechange = function () {
     if (request.status == 409) {
-      throw "Username taken!";
+      errorBox.innerText = "Username taken!";
     } else if (request.status == 500) {
-      throw "Error occured!";
+      errorBox.innerText = "Error occured!";
     } else if (request.status == 201) {
       return;
+    } else {
+      errorBox.innerText = "Unknown error";
     }
   };
 }
