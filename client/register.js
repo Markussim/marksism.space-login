@@ -8,7 +8,7 @@ function regUsrOnSubmit() {
 
   try {
     if (pass == confirm && user.length > 0 && pass.length > 0) {
-      registerUser(user, pass, errorBox);
+      registerUser(user, pass, errorBox, document.getElementById("infoText"));
     } else if (user.length == 0) {
       errorBox.innerText = "Please pick a name";
     } else if (pass.length == 0) {
