@@ -6,7 +6,7 @@ const session = require("express-session");
 const sessionstore = require("sessionstore");
 const passport = require("passport");
 const app = express();
-const port = 3000;
+const port = 8975;
 
 let store;
 connectToMongo("marksism-login");
@@ -21,6 +21,7 @@ app.use(
     store: store,
     resave: true,
     saveUninitialized: true,
+    cookie: { secure: true },
   })
 );
 app.use(passport.initialize(undefined));
@@ -68,7 +69,7 @@ app.get("/register", checkNotAuthenticated, (req, res) => {
 });
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
-    res.sendFile(__dirname + "/client/login.html");
+  res.sendFile(__dirname + "/client/login.html");
 });
 
 function connectToMongo(dbName) {
