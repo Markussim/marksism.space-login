@@ -3,6 +3,7 @@ const dBModule = require("./dbModule.js");
 const User = require("./models/user.js");
 const fs = require("fs");
 const session = require("express-session");
+const flash = require("express-flash");
 const sessionstore = require("sessionstore");
 const passport = require("passport");
 const app = express();
@@ -11,6 +12,7 @@ const port = 8975;
 let store;
 connectToMongo("marksism-login");
 
+app.use(flash());
 app.use(express.static("client"));
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -23,7 +25,7 @@ app.use(
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: false,
-      domain: ".marksism.space",
+      //domain: ".marksism.space",
       sameSite: "strict",
     },
   })
