@@ -64,8 +64,9 @@ app.post(
   })
 );
 
-app.get("/auth", checkAuthenticated, (req, res) => {
-  res.send("You're authenticated");
+app.get("/auth", checkAuthenticated, async (req, res) => {
+  let fuling = await req.user;
+  res.send("You're authenticated as " + fuling.name);
 });
 
 app.get("/register", checkNotAuthenticated, (req, res) => {
@@ -74,6 +75,11 @@ app.get("/register", checkNotAuthenticated, (req, res) => {
 
 app.get("/login", checkNotAuthenticated, (req, res) => {
   res.sendFile(__dirname + "/client/login.html");
+});
+
+app.get("/logout", checkAuthenticated, (req, res) => {
+  req.logOut();
+  res.send("You are now logged out");
 });
 
 function connectToMongo(dbName) {
