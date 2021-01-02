@@ -15,13 +15,17 @@ app.use(express.static("client"));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
     secret: "keyboard cat",
     store: store,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: false,
+      domain: ".marksism.space",
+      sameSite: "strict",
+    },
   })
 );
 app.use(passport.initialize(undefined));
